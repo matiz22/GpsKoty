@@ -1,17 +1,28 @@
 import models.GpsContainer
 import models.Path
+import models.Point
 
-fun main(args: Array<String>) {
-    val points = mutableListOf(Point(1.0, 2.0), Point(3.5, 4.2), Point(5.1, 6.7))
-    val paths = mutableListOf(Path(points[0], points[1]), Path(points[1], points[2]))
+const val N: Int = 10
+const val K: Int = 4
+
+fun main() {
+    val points = MutableList(N) {
+        Point.generateRandom()
+    }
+
+    val paths = mutableListOf<Path>()
+
     val gpsContainer = GpsContainer(points = points, paths = paths)
+
     gpsContainer.saveToFile("cosik.txt")
+
     val loadedGpsContainer = GpsContainer.loadFromFile("cosik.txt")
-    loadedGpsContainer.points.forEach{
-        println(it)
-    }
-    loadedGpsContainer.paths.forEach{
+
+    loadedGpsContainer.points.forEach {
         println(it)
     }
 
+    loadedGpsContainer.paths.forEach {
+        println(it)
+    }
 }
