@@ -1,9 +1,10 @@
 import models.GpsContainer
 import models.Path
 import models.Point
+import models.findShortestPathWithIntermediatePointsFor
 
-const val N: Int = 10
-const val K: Int = 4
+const val N: Int = 1000
+const val K: Int = 100
 
 fun main() {
     val points = MutableList(N) {
@@ -18,11 +19,28 @@ fun main() {
 
     val loadedGpsContainer = GpsContainer.loadFromFile("cosik.txt")
 
-    loadedGpsContainer.points.forEach {
-        println(it)
-    }
+    val source = points[17]
+    val destination = points[10]
 
-    loadedGpsContainer.paths.forEach {
-        println(it)
-    }
+    println("source: $source")
+    println("destination: $destination")
+
+    val estimatedPath = loadedGpsContainer.findShortestPathWithIntermediatePointsFor(
+        source = source,
+        destination = destination,
+        k = K,
+    )
+
+    println(estimatedPath)
+
+    // may throw an exception if there are some points with exactly the same coordinates in the list
+    // significantly faster, but usually returns a significantly worse estimate
+    // should be used for high values of K and/or N
+//    val estimatedFastPath = loadedGpsContainer.findFastShortestPathWithIntermediatePointsFor(
+//        source = points[10],
+//        destination = points[10],
+//        k = K,
+//    )
+//
+//    println(estimatedFastPath)
 }

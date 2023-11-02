@@ -4,11 +4,17 @@ package models
 
 import helper.generateRandomDouble
 import tokens.PointTokens
+import kotlin.math.pow
+import kotlin.math.sqrt
 
 data class Point(
     val x: Double,
     val y: Double
 ) {
+    fun distanceTo(other: Point): Double {
+        return sqrt((this.x - other.x).pow(2) + (this.y - other.y).pow(2))
+    }
+
     companion object {
         fun generateRandom(
             xFrom: Double = PointTokens.RandomFrom,
