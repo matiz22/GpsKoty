@@ -1,12 +1,15 @@
+import helper.generateRandomInt
 import models.GpsContainer
 import models.Path
 import models.Point
 import models.findShortestPathWithIntermediatePointsFor
 
-const val N: Int = 1000
-const val K: Int = 100
+const val N: Int = 500
+//const val K: Int = 100
 
 fun main() {
+    val K = generateRandomInt(0, N - 1)
+
     val points = MutableList(N) {
         Point.generateRandom()
     }
@@ -19,9 +22,10 @@ fun main() {
 
     val loadedGpsContainer = GpsContainer.loadFromFile("cosik.txt")
 
-    val source = points[17]
-    val destination = points[10]
+    val source = points[generateRandomInt(0, N - 1)]
+    val destination = points[generateRandomInt(0, N - 1)]
 
+    println("K: $K")
     println("source: $source")
     println("destination: $destination")
 
