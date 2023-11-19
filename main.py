@@ -248,9 +248,11 @@ def split_zones(preys: list[Prey], cats: list[Cat]):
     zones = [zone1, zone2, zone3]    
     
     for z1, z2, z3 in itertools.permutations(zones, 3):
-        s = sum(cats[0].weights[p.type] for p in z1) / len(z1) \
-            + sum(cats[1].weights[p.type] for p in z2) / len(z2) \
-            + sum(cats[2].weights[p.type] for p in z3) / len(z3)
+        s1 = len([p for p in z1 if p.type in {PreyType.FIELD_MOUSE,PreyType.HOUSE_MOUSE }]) / (150 + 80)
+        s2 = len([p for p in z2 if p.type == PreyType.SNAIL]) / 90
+        s3 = len([p for p in z3 if p.type in {PreyType.ROCK,PreyType.LEAF }]) / (300 + 200)
+
+        s = (s1 + s2 + s3) / 3
         
         if s > current_max:
             current_max = s
@@ -290,18 +292,13 @@ def main():
 
     cats = [luna, adriana, dante]
 
-    print("Creating preys...")
     preys = Prey.get_preys() 
-    print(f'Created {len(preys)} preys')
 
-    split_zones(preys, cats)
+    split_zones(preys, cats)    
 
-    for cat in cats:
-        print(f'{cat} starts hunting')
-        cat.start_hunting()
-        print(f'{cat} got {cat.score} points\n\n')    
-
-    vizualize([], [cat.path for cat in cats])
+    print(f'Ocena obszaru Luny: {len([p for p in luna.preys if p.type in {PreyType.FIELD_MOUSE,PreyType.HOUSE_MOUSE }])} / {150 + 80}')
+    print(f'Ocena obszaru Adriany: {len([p for p in luna.preys if p.type == PreyType.SNAIL])} / {90}')
+    print(f'Ocena obszaru Dantego: {len([p for p in luna.preys if p.type in {PreyType.ROCK, PreyType.LEAF}])} / {300 + 200}')
 
 
 main()

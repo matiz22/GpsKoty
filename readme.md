@@ -1,10 +1,9 @@
-# Zadanie 4
+# Zadanie 5
 
 ## Opis działania algorytmu
 Losow generowane są obiekty.  
-Pierw poluje Luna przez 2h, następnie Adriana i Dante.  
-Żeby ścieżki się nie krzyżowały, każdemu kotu został przydzielony odgórnie obszar do polowania. Obszar zawsze wygląda tak samo, lecz dobór obszaru do konkretnego kota jest dobierany przez obliczaną średnią wartość obiektów na danym obszarze.  
-Każdy kot zawszy wybiera zachłannie najcenniejszy obiekt.
-## Wizualiacja ścieżek kotów
+Obszar zawsze wygląda tak samo, lecz dobór obszaru do konkretnego kota jest dobierany przez obliczaną średnią ocenę obszarów.
+
+## Wizualiacja ścieżek kotów na ograniczonych obszarach
 ![Alt text](./image.png)
 
